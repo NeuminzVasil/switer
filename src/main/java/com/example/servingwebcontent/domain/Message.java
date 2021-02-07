@@ -1,19 +1,25 @@
 package com.example.servingwebcontent.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
+@Table(name = "messages")
+@Data
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String text;
+
     private String tag;
 
+    /**
+     * Пустой конструктор требуется для создания Entity
+     */
     public Message() {
     }
 
@@ -22,27 +28,11 @@ public class Message {
         this.tag = tag;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
+    @Override
+    public String toString() {
+        return "Message{" +
+                "text='" + text + '\'' +
+                ", tag='" + tag + '\'' +
+                '}';
     }
 }
