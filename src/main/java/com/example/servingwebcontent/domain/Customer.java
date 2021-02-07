@@ -1,7 +1,9 @@
 package com.example.servingwebcontent.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cascade;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,7 +11,8 @@ import java.util.List;
 @Entity
 @Table(name = "customers")
 @Data
-public class Customer {
+@NoArgsConstructor
+public class Customer implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,22 +34,15 @@ public class Customer {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Role> authorities;
 
-    public Customer() {
-    }
-
-    public Customer(String login, String firstName, String lastName) {
+    public Customer(String login, String firstName, String lastName, Boolean active) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public Customer setActive(Boolean active) {
         this.active = active;
-        return this;
     }
 
     @Override
@@ -56,5 +52,30 @@ public class Customer {
                 ", active=" + active +
                 ", authorities=" + authorities +
                 '}';
+    }
+
+    @Override
+    public String getUsername() {
+        return getLogin();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return getActive();
     }
 }

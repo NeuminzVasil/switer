@@ -2,6 +2,7 @@ package com.example.servingwebcontent.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -10,7 +11,7 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @Table(name = "authorities")
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -46,5 +47,7 @@ public class Role {
     public String toString() {
         return authority;
     }
+
+
 }
 
