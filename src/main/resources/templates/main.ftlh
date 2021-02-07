@@ -6,6 +6,8 @@
         <@l.logout />
     </div>
 
+    <div><a href="/customer">customer list</a></div>
+
     <div>
         <form method="post">
             <input type="text" name="text" placeholder="Введите сообщение">
