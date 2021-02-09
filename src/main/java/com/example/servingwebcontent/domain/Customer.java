@@ -6,6 +6,7 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -43,6 +44,10 @@ public class Customer implements UserDetails {
         this.firstName = firstName;
         this.lastName = lastName;
         this.active = active;
+    }
+
+    public boolean isAdmin(){
+        return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
     }
 
     @Override

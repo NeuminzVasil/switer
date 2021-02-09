@@ -1,5 +1,5 @@
 <#import "parts/common.ftlh" as c>
 <@c.page>
-    <div>hello, user</div>
-    <a href="/main">Main page</a>
+    <h5>hello, Guest</h5>
+    <div>this is testing java program</div>
 </@c.page>

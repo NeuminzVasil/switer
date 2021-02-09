@@ -23,6 +23,9 @@ public class Message {
     @JoinColumn(name = "customerid")
     private Customer customer;
 
+    private String filename;
+
+
     public Message(String text, String tag, Customer customer) {
         this.text = text;
         this.tag = tag;
