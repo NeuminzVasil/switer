@@ -17,7 +17,6 @@ public class CustomerController {
     @Autowired
     private CustomerRepo customerRepo;
 
-
     @GetMapping
     public String customerList(Model model) {
         model.addAttribute("customers", customerRepo.findAll());

@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CustomerRepo extends JpaRepository<Customer, Long> {
 
     Customer findByLogin(String login);
+
+    Customer findByActivationCode(String code);
+
 }

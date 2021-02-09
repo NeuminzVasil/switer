@@ -1,22 +1,20 @@
 package com.example.servingwebcontent.controller;
 
 import com.example.servingwebcontent.domain.Customer;
-import com.example.servingwebcontent.domain.Role;
-import com.example.servingwebcontent.repos.CustomerRepo;
+import com.example.servingwebcontent.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @Controller
 public class RegistrationController {
     @Autowired
-    private CustomerRepo customerRepo;
-
+    private CustomerService customerService;
 
     @GetMapping("/registration")
     public String registration(Map<String, Object> model) {
@@ -29,19 +27,24 @@ public class RegistrationController {
 
         System.out.println(customer);
 
-        Customer customerFromDB = customerRepo.findByLogin(customer.getLogin());
-
-        if (customerFromDB != null) {
-            model.put("message", "User " + customerFromDB + " exist!");
+        if (!customerService.addCustomer(customer)) {
+            model.put("message", "User " + customer.getLogin() + " exist!");
             return "registration";
         }
 
-        customer.setActive(true);
-        customer.setAuthorities(Collections.singletonList(new Role(customer, "ROLE_GUEST")));
-        System.out.println(customer);
-        customerRepo.save(customer);
-
         return "redirect:/login";
+    }
+
+    @GetMapping("/activate/{code}")
+    public String activate(Model model, @PathVariable String code) {
+        boolean isActivated = customerService.activateUser(code);
+
+        if (isActivated){
+            model.addAttribute("message", "Activation Successfully");
+        } else
+            model.addAttribute("message", "Activation code not found");
+
+        return "login";
     }
 
 }

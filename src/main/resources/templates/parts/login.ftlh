@@ -3,19 +3,32 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> User Name : </label>
             <div class="col-sm-6">
-                <input class="form-control" type="text" name="username" placeholder="login"/>
+                <input class="form-control" type="text" name="login" placeholder="login"/>
             </div>
         </div>
+
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Password: </label>
             <div class="col-sm-6">
                 <input class="form-control" type="password" name="password" placeholder="password"/>
             </div>
         </div>
+
+        <#if isRegisterForm>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"> eMail: </label>
+                <div class="col-sm-6">
+                    <input class="form-control" type="email" name="email" placeholder="eMail@eMail.com"/>
+                </div>
+            </div>
+        </#if>
+
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+
         <#if !isRegisterForm> <a href="/registration">Add new user</a></#if>
+
         <button class="btn btn-primary" type="submit">
-           <#if isRegisterForm>Create<#else>Sign In </#if>
+            <#if isRegisterForm>Create<#else>Sign In </#if>
         </button>
     </form>
 </#macro>

@@ -39,6 +39,9 @@ public class Customer implements UserDetails {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Role> authorities;
 
+    private String email;
+    private String activationCode;
+
     public Customer(String login, String firstName, String lastName, Boolean active) {
         this.login = login;
         this.firstName = firstName;
