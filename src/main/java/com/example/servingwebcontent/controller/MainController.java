@@ -63,6 +63,7 @@ public class MainController {
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
+            model.addAttribute("message", message);
         } else {
             /**
              * обработка загрузки файла из UI в локальную директорию
@@ -94,7 +95,7 @@ public class MainController {
             messageRepo.save(message);
         }
         Iterable<Message> messages = messageRepo.findAll();
-        model.addAttribute("messages", messages);
+        model.addAttribute("message", messages);
         return "main";
     }
 
