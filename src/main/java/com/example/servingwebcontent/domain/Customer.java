@@ -6,7 +6,8 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Arrays;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,7 @@ public class Customer implements UserDetails {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank(message = "Login can`t be empty")
     @Column(name = "login")
     private String login;
 
@@ -29,8 +31,13 @@ public class Customer implements UserDetails {
     @Column(name = "lastname")
     private String lastName;
 
+    @NotBlank(message = "password can`t be empty")
     @Column(name = "password")
     private String password;
+
+    @NotBlank(message = "password confirmation can`t be empty")
+    @Transient
+    private String password2;
 
     @Column(name = "active")
     private Boolean active;
@@ -39,6 +46,8 @@ public class Customer implements UserDetails {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Role> authorities;
 
+    @Email(message = "email isn`t correct")
+    @NotBlank(message = "mail can`t be empty")
     private String email;
     private String activationCode;
 
@@ -49,7 +58,7 @@ public class Customer implements UserDetails {
         this.active = active;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return authorities.stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
     }
 

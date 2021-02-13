@@ -2,8 +2,10 @@ package com.example.servingwebcontent.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "messages")
@@ -15,6 +17,8 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank (message = "Please fill the message")
+    @Length (max = 2048, message =  "Message to long")
     private String text;
 
     private String tag;
