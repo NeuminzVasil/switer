@@ -13,14 +13,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/main">Messages</a>
                 </li>
                 <#if isAdmin>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/customer">Customer List</a>
+                    </li>
+                </#if>
+                <#if customer??>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/customer/profile">Profile</a>
                     </li>
                 </#if>
             </ul>

@@ -3,7 +3,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> User Name : </label>
             <div class="col-sm-6">
-                <input class="form-control" type="text" name="login" placeholder="login"/>
+                <input class="form-control" type="text" name="username" placeholder="login"/>
             </div>
         </div>
 
