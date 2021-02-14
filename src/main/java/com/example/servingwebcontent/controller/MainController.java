@@ -9,7 +9,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
@@ -44,9 +41,9 @@ public class MainController {
 
         if (filter_param != null && !filter_param.isEmpty())
             messages = messageRepo.findByTag(filter_param);
-        else
+        else {
             messages = messageRepo.findAll();
-
+        }
         model.addAttribute("messages", messages);
         model.addAttribute("filter", filter_param);
         return "main";
@@ -96,7 +93,7 @@ public class MainController {
             messageRepo.save(message);
         }
         Iterable<Message> messages = messageRepo.findAll();
-        model.addAttribute("message", messages);
+        model.addAttribute("messages", messages);
         return "main";
     }
 
