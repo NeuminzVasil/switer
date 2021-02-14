@@ -25,7 +25,7 @@ public class Message {
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "customerid")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     private String filename;

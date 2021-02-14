@@ -18,7 +18,7 @@ public class Role implements GrantedAuthority {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "customerid")
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column(name = "authority")
