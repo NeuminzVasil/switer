@@ -35,10 +35,6 @@ public class Customer implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @NotBlank(message = "password confirmation can`t be empty")
-    @Transient
-    private String password2;
-
     @Column(name = "active")
     private Boolean active;
 
