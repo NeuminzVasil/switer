@@ -30,7 +30,11 @@ public class CustomerService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return customerRepo.findByLogin(login);
+        Customer customer = customerRepo.findByLogin(login);
+        if (customer == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return customer;
     }
 
     public boolean addCustomer(Customer customer) {

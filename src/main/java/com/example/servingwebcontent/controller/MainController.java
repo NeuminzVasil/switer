@@ -92,6 +92,7 @@ public class MainController {
                 message.setFilename(resultFilename);
                 System.out.println(uploadPath + "/" + resultFilename);
             }
+            model.addAttribute("message", null);
             messageRepo.save(message);
         }
         Iterable<Message> messages = messageRepo.findAll();
