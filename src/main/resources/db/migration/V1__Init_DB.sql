@@ -14,7 +14,7 @@ create table customers
     firstname       varchar(70),
     lastname        varchar(70),
     login           varchar(100) not null ,
-    password        varchar(50) not null ,
+    password        varchar(250) not null ,
     primary key (id)
 );
 create table messages
