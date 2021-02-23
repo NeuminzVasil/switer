@@ -1,0 +1,33 @@
+spring:
+  main:
+    banner-mode: off
+  session:
+    jdbc:
+      initialize-schema: always
+      table-name: SPRING_SESSION
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: ${random.uuid}
+    username: ${random.uuid}
+    password: ${random.uuid}
+  mail:
+    host: smtp.yandex.ru
+    username: ${random.uuid}
+    password: ${random.uuid}
+    port: 465
+    protocol: smtps
+
+
+freemarker:
+  expose-request-attributes: true
+
+mail:
+  debug: true
+
+recaptcha.secret: ${random.uuid}
+
+upload.path: ${random.uuid}
